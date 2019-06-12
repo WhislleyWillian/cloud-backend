@@ -9,7 +9,9 @@ const BoxesController = require('./controllers/BoxesController');
 const BoxController = require('./controllers/BoxController');
 const FileController = require('./controllers/FileController');
 
-routes.post("/login", UserController.login);
+routes.post("/login", (req, res, next) => {
+    console.log(req.headers)
+}, UserController.login);
 routes.post("/register", UserController.register);
 routes.get("/users/search", UserController.allUsers);
 routes.get("/users/teste", UserController.getUser);
