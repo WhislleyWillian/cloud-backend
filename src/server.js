@@ -22,6 +22,8 @@ mongoose.connect('mongodb+srv://whislley:whislley@cluster0-dpjfq.mongodb.net/clo
 
 app.use((req, res, next) => {
     req.io = io;
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
     return next();
 });
