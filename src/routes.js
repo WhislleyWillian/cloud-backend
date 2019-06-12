@@ -9,7 +9,7 @@ const BoxesController = require('./controllers/BoxesController');
 const BoxController = require('./controllers/BoxController');
 const FileController = require('./controllers/FileController');
 
-routes.get("/login", UserController.login);
+routes.post("/login", UserController.login);
 routes.post("/register", UserController.register);
 routes.get("/users/search", UserController.allUsers);
 routes.get("/users/teste", UserController.getUser);
