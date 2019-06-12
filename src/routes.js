@@ -29,6 +29,7 @@ routes.get("/users/teste", validationToken, UserController.getUser);
 routes.get("/boxes-view", validationToken, BoxesController.show);
 routes.post("/new-box", validationToken, BoxController.store);
 routes.get("/box/:id", validationToken, BoxController.show);
+routes.post("/share-box", BoxController.shareBox);
 
 routes.post("/boxes/:id/files", validationToken, multer(multerConfig).single('file'), FileController.store);
 

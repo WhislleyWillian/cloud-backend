@@ -52,6 +52,8 @@ class UserController {
                     if (user) {
                         if (bcrypt.compare(req.body.password, user.password)) {
                             return res.status(201).json({ success: true, message: 'Login successfully completed', statusCode: 201, user });
+                        } else {
+                            return res.status(500).json({ success: false, message: 'User not found', statusCode: 500, user });
                         }
                     } else {
                         return res.status(500).json({ success: false, message: 'User not found', statusCode: 500, user });

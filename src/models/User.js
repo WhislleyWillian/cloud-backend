@@ -13,7 +13,8 @@ const User = new mongoose.Schema({
         type: String,
         required: true
     },
-    boxes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Box" }]
+    boxes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Box" }],
+    sharedBoxes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Box" }]
 }, {
     timestamps: true
 });

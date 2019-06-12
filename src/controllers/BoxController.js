@@ -27,6 +27,21 @@ class BoxController {
 
         return res.json(box);
     }
+
+    async shareBox(req, res) {
+
+        const user = await User.findById('5cffe5a732f56f12d93678ba');
+        const shareUser = await User.findOne({ username: req.body.shareUser });
+        if (shareUser) {
+            const shareBox = await Box.findById(req.body.box);
+            if (shareBox) {
+                user.sharedBoxes.push(shareBox);
+                await user.save();
+                shareUser.boxes.push(shareBox);
+                await shareUser.save();
+            }
+        }
+    }
 }
 
 module.exports = new BoxController();

@@ -14,6 +14,7 @@ class BoxesController {
         });
 
         return res.json(boxes);
+
     }
 }
 
