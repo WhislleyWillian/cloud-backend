@@ -12,7 +12,11 @@
     "express": "^4.16.4",
     "mongoose": "^5.5.0",
     "multer": "^1.4.1",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "consign": "^1.0.3",
+    "jsonwebtoken": "^8.1.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
