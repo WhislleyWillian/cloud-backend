@@ -28,18 +28,18 @@ class UserController {
                                 });
 
                                 newUser.save()
-                                    .then(() => res.json({ success: true, message: 'User created with success', statusCode: 201, newUser }))
-                                    .catch(err => res.json({ success: false, message: err, statusCode: 500 }));
+                                    .then(() => res.status(201).json({ success: true, message: 'User created with success', statusCode: 201, newUser }))
+                                    .catch(err => res.status(500).json({ success: false, message: err, statusCode: 500 }));
                             })
 
-                            .catch(err => res.json({ success: false, message: err, statusCode: 500 }));
+                            .catch(err => res.status(500).json({ success: false, message: err, statusCode: 500 }));
                         }
                     })
             } else {
-                return res.json({ success: false, message: 'Passwords doesnt match', statusCode: 400 });
+                return res.status(400).json({ success: false, message: 'Passwords doesnt match', statusCode: 400 });
             }
         } else {
-            return res.json({ success: false, message: 'Username and password fields are requireds', statusCode: 400 });
+            return res.status(400).json({ success: false, message: 'Username and password fields are requireds', statusCode: 400 });
         }
     }
 
@@ -51,14 +51,14 @@ class UserController {
                 .then(user => {
                     if (user) {
                         if (bcrypt.compare(req.body.password, user.password)) {
-                            return res.json({ success: true, message: 'Login successfully completed', statusCode: 201, user });
+                            return res.status(201).json({ success: true, message: 'Login successfully completed', statusCode: 201, user });
                         }
                     } else {
-                        return res.json({ success: false, message: 'User not found', statusCode: 500, user });
+                        return res.status(500).json({ success: false, message: 'User not found', statusCode: 500, user });
                     }
                 })
         } else {
-            return res.json({ success: false, message: 'Username and password fields are requireds', statusCode: 400 });
+            return res.status(400).json({ success: false, message: 'Username and password fields are requireds', statusCode: 400 });
         }
     }
 
@@ -67,9 +67,9 @@ class UserController {
             User.findOne({ 'username': req.body.username })
                 .then(user => {
                     if (user) {
-                        return res.json({ user });
+                        return res.status(201).json({ user });
                     } else {
-                        return res.json({ success: false, message: 'User not found', statusCode: 500, user, encryptedPassword });
+                        return res.status(500).json({ success: false, message: 'User not found', statusCode: 500, user, encryptedPassword });
                     }
                 })
         }
