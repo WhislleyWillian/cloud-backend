@@ -30,7 +30,7 @@ class BoxController {
 
     async shareBox(req, res) {
 
-        const user = await User.findById('5cffe5a732f56f12d93678ba');
+        const user = await User.findById(req.headers.authorization);
         const shareUser = await User.findOne({ username: req.body.shareUser });
         if (shareUser) {
             const shareBox = await Box.findById(req.body.box);
