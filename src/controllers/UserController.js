@@ -44,6 +44,7 @@ class UserController {
     }
 
     async login(req, res) {
+
         if (req.body.username && req.body.password) {
 
             User.findOne({ 'username': req.body.username })
@@ -53,7 +54,7 @@ class UserController {
                             return res.json({ success: true, message: 'Login successfully completed', statusCode: 201, user });
                         }
                     } else {
-                        return res.json({ success: false, message: 'User not found', statusCode: 500, user, encryptedPassword });
+                        return res.json({ success: false, message: 'User not found', statusCode: 500, user });
                     }
                 })
         } else {
