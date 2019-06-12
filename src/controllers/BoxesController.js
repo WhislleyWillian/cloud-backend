@@ -1,11 +1,14 @@
 const Boxes = require('../models/Boxes');
 const Box = require('../models/Box');
+const User = require('../models/User');
 
 class BoxesController {
 
     async show(req, res){
 
-        const boxes = await Box.find({}).populate({
+        const user = await User.findById(req.headers.authorization);
+
+        const boxes = await Box.find({ _id: user.boxes }).populate({
             path: 'boxes',
             options: { sort: { createdAt: -1 } }
         });

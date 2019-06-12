@@ -6,7 +6,9 @@ class BoxController {
 
     async store(req, res) {
 
-        const user = await User.findById(req.params.id);
+        console.log("Criando uma pasta");
+        
+        const user = await User.findById(req.headers.authorization);
 
         const box = await Box.create(req.body);
 
