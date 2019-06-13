@@ -5,17 +5,11 @@ const UserController = require('./UserController');
 class BoxController {
 
     async store(req, res) {
-
-        console.log("Criando uma pasta");
         
         const user = await User.findById(req.headers.authorization);
-
         const box = await Box.create(req.body);
-
         user.boxes.push(box);
-
         await user.save();
-
         return res.json(box);
     }
 
@@ -24,7 +18,6 @@ class BoxController {
             path: 'files',
             options: { sort: { createdAt: -1 } }
         });
-
         return res.json(box);
     }
 
@@ -54,10 +47,9 @@ class BoxController {
 
     async deleteBox(req, res) {
         const user = await User.findById(req.headers.authorization);
-        console.log(req.body.box);
         const deleteBox = await Box.findByIdAndDelete(req.body.box);
         if (deleteBox) {
-            user.boxes.splice(user.boxes.indexOf(req.body.deleteBox), 1);
+            user.boxes.remove(deleteBox._id);
             await user.save();
             return res.status(201).json({ success: true, message: 'Pasta excluída', statusCode: 201, deleteBox });
         } else {
@@ -66,9 +58,7 @@ class BoxController {
     }
 
     async renameBox(req, res) {
-        console.log(req.body.box);
         const box = await Box.findById(req.body.box);
-        console.log(box);
         if (box) {
             box.title = req.body.title;
             await box.save();

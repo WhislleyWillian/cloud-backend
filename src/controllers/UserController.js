@@ -50,13 +50,13 @@ class UserController {
             User.findOne({ 'username': req.body.username })
                 .then(user => {
                     if (user) {
-                        if (bcrypt.compare(req.body.password, user.password)) {
+                        if (bcrypt.compareSync(req.body.password, user.password)) {
                             return res.status(201).json({ success: true, message: 'Login successfully completed', statusCode: 201, user });
                         } else {
-                            return res.status(500).json({ success: false, message: 'User not found', statusCode: 500, user });
+                            return res.status(500).json({ success: false, message: 'Incorrect password', statusCode: 500 });
                         }
                     } else {
-                        return res.status(500).json({ success: false, message: 'User not found', statusCode: 500, user });
+                        return res.status(500).json({ success: false, message: 'User not found', statusCode: 500 });
                     }
                 })
         } else {
